@@ -1,0 +1,33 @@
+<html layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <div class="bg-body-tertiary p-5 rounded">
+        <div class="col-sm-8 mx-auto">
+            <h1>Categories</h1>
+            <form method="POST" action="/categories">
+                <input type="text" name="name">
+                <button type="submit">Add Category</button>
+            </form>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tr th:each="category : ${categories}">
+                    <td th:text="${category.id}"></td>
+                    <td th:text="${category.name}"></td>
+                    <td>
+                        <form method="POST" th:action="@{/categories/} + ${category.id} + @{/delete}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

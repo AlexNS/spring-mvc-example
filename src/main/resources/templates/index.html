@@ -1,26 +1,32 @@
-<html>
-<head>
-    <link href="/css/bootstrap.css" rel="stylesheet">
-</head>
+<html layout:decorate="~{layout}">
 <body>
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            Column
-        </div>
-        <div class="col">
-            Column
-        </div>
-        <div class="col">
-            Column
+    <div layout:fragment="content">
+        <div class="bg-body-tertiary p-5 rounded">
+            <h1>Expenses</h1>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Comment</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                </tr>
+                </thead>
+                <tr th:each="rec : ${expenseRecords}">
+                    <td th:text="${rec.date}"></td>
+                    <td th:text="${rec.comment}"></td>
+                    <td th:text="${rec.amount}"></td>
+                    <td th:text="${rec.category.name}"></td>
+                    <td>
+                        <!--<form method="POST" th:action="@{/categories/} + ${category.id} + @{/delete}">
+                            <button type="submit">Delete</button>
+                        </form>-->
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
-</div>
-
-<ul>
-    <li th:each="category : ${categories}" th:text="${category.name}"></li>
-</ul>
-
-    <script src="/js/bootstrap.js"></script>
 </body>
 </html>
+

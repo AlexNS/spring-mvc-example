@@ -27,7 +27,8 @@ public class SecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
-                .authenticationManager(authenticationManager());
+                .authenticationManager(authenticationManager())
+                .csrf().disable();
 
         return http.build();
     }

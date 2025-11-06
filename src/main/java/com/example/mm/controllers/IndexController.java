@@ -1,12 +1,14 @@
 package com.example.mm.controllers;
 
 import com.example.mm.repositores.CategoryRepository;
+import com.example.mm.repositores.ExpenseRecordRepository;
 import org.apache.el.stream.Stream;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -14,22 +16,23 @@ import java.util.stream.StreamSupport;
 @RequestMapping("/")
 public class IndexController {
 
-    private final CategoryRepository categoryRepository;
+    private final ExpenseRecordRepository expenseRecordRepository;
 
-    public IndexController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public IndexController(ExpenseRecordRepository expenseRecordRepository) {
+        this.expenseRecordRepository = expenseRecordRepository;
     }
 
 
     @GetMapping
     public String index(ModelMap modelMap) {
-        var categories = categoryRepository.findAll();
+        var expenseRecords = expenseRecordRepository.findAll();
 
-        var categoriesList = StreamSupport
-                .stream(categories.spliterator(), false)
+        var expenseRecordsList = StreamSupport
+                .stream(expenseRecords.spliterator(), false)
                 .toList();
 
-        modelMap.addAttribute("categories", categoriesList);
+        modelMap.addAttribute("expenseRecords", expenseRecordsList);
+
         return "index";
     }
 }
